@@ -48,10 +48,7 @@ module tt_um_example (
       inputs <= {ui_in[7:0], inputs[31:8]};
     end
     
-    convolution <= (inputs[7:0] * weights[7:0]);
-    convolution <= convolution + (inputs[15:8] * weights[15:8]);
-    convolution <= convolution + (inputs[23:16] * weights[23:16]);
-    convolution <= convolution + (inputs[31:24] * weights[31:24]);
+    convolution <= (inputs[7:0] * weights[7:0]) + (inputs[15:8] * weights[15:8]) + (inputs[23:16] * weights[23:16]) + (inputs[31:24] * weights[31:24]);
     
     if (convolution > greatest) begin
       greatest <= convolution;
