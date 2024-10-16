@@ -32,7 +32,6 @@ module tt_um_example (
   assign uio_oe[1:0] = 1;
   assign uio_oe[7:2] = 0;
 
-  assign uio_in[5:0] = 0;
   assign uio_out[7:2] = 0;
 
   always @ (posedge clk) begin
@@ -63,6 +62,6 @@ module tt_um_example (
   assign uio_out[1:0] = outputState[9:8];
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, 1'b0};
+  wire _unused = &{ena, uio_in[5:0], 1'b0};
 
 endmodule
