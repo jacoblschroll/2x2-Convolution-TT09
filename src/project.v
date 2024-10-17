@@ -45,12 +45,12 @@ module tt_um_example (
       inputs <= {ui_in[7:0], inputs[31:8]};
     end
     
-    convolution <= mul0 + mul1 + mul2 + mul3;
+    convolution <= (inputs[7:0] * weights[7:0]) + (inputs[15:8] * weights[15:8]) + (inputs[23:16] * weights[23:16]) + (inputs[31:24] * weights[31:24]);
   end
 
   assign uo_out = outputState[7:0];
   assign uio_out[1:0] = outputState[9:8];
 
-  wire unused_signals = ena | uio_in[5:0];
+  wire _unused = &{ena, uio_in[5:0], 1'b0};
 
 endmodule
