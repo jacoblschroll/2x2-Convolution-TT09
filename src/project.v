@@ -37,8 +37,12 @@ module tt_um_example (
       inputs <= 32'b0;
       weights <= 32'b0;
       odd <= 1'b0;
-    end else if (uio_in[7]) begin
+      convolution <= 18'b0;
+    end else if (uio_in[7] && !odd) begin
       outputState <= {odd, convolution[8:0]};
+      odd <= !odd;
+    end else if (uio_in[7] && odd) begin
+      outputState <= {odd, convolution[17:9]};
       odd <= !odd;
     end else if (uio_in[6]) begin
       weights <= {ui_in[7:0], weights[31:8]};
