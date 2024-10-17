@@ -20,8 +20,6 @@ module tt_um_example (
   reg [31:0] inputs;
   reg [31:0] weights;
   
-  reg [17:0] greatest;
-  
   reg [17:0] convolution;
   
   reg [9:0] outputState;
@@ -40,7 +38,7 @@ module tt_um_example (
       weights <= 32'b0;
       odd <= 1'b0;
     end else if (uio_in[7]) begin
-      outputState <= {odd, greatest[8:0]};
+      outputState <= {odd, convolution[8:0]};
       odd <= !odd;
     end else if (uio_in[6]) begin
       weights <= {ui_in[7:0], weights[31:8]};
@@ -49,10 +47,6 @@ module tt_um_example (
     end
     
     convolution <= (inputs[7:0] * weights[7:0]) + (inputs[15:8] * weights[15:8]) + (inputs[23:16] * weights[23:16]) + (inputs[31:24] * weights[31:24]);
-    
-    if (convolution > greatest) begin
-      greatest <= convolution;
-    end
   end
 
   assign uo_out = outputState[7:0];
