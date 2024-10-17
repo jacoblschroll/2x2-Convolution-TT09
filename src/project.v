@@ -25,11 +25,6 @@ module tt_um_example (
   assign uio_oe[1:0] = 1;
   assign uio_oe[7:2] = 0;
   
-  wire [7:0] mul0 = inputs[7:0] * weights[7:0];
-  wire [7:0] mul1 = inputs[15:8] * weights[15:8];
-  wire [7:0] mul2 = inputs[23:16] * weights[23:16];
-  wire [7:0] mul3 = inputs[31:24] * weights[31:24];
-  
   always @ (posedge clk) begin
     if (!rst_n) begin
       inputs <= 32'b0;
