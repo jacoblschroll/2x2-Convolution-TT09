@@ -17,7 +17,9 @@ module tt_um_example (
 );
 
   // 2x2, each value is 8-bits
-  reg [31:0] inputs;
+  reg [15:0] line1;
+  reg [15:0] line2;
+  
   reg [31:0] weights;
   reg [17:0] convolution;
   reg [9:0] outputState;
@@ -41,7 +43,11 @@ module tt_um_example (
     end else if (uio_in[6]) begin
       weights <= {ui_in[7:0], weights[31:8]};
     end else begin
-      inputs <= {ui_in[7:0], inputs[31:8]};
+      if (uio_in[5]) begin
+        line1 <= {ui_in[7:0], line1[15:8]};
+      end else begin
+        line2 <= {ui_in[7:0], line2[15:8]};
+      end
     end
     
     convolution <= (inputs[7:0] * weights[7:0]) + (inputs[15:8] * weights[15:8]) + (inputs[23:16] * weights[23:16]) + (inputs[31:24] * weights[31:24]);
@@ -51,6 +57,6 @@ module tt_um_example (
   assign uio_out[1:0] = outputState[9:8];
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, uio_in[5:0], 1'b0};
+  wire _unused = &{ena, uio_in[4:0], 1'b0};
 
 endmodule

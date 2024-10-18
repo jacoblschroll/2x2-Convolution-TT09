@@ -47,7 +47,7 @@ pinout:
   uio[2]: ""
   uio[3]: ""
   uio[4]: ""
-  uio[5]: ""
+  uio[5]: "Line Select"
   uio[6]: "Write to register"
   uio[7]: "Write data out"
 
