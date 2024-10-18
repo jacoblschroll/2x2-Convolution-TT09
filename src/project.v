@@ -50,7 +50,7 @@ module tt_um_example (
       end
     end
     
-    convolution <= (inputs[7:0] * weights[7:0]) + (inputs[15:8] * weights[15:8]) + (inputs[23:16] * weights[23:16]) + (inputs[31:24] * weights[31:24]);
+    convolution <= (line1[7:0] * weights[7:0]) + (line1[15:8] * weights[15:8]) + (line2[23:16] * weights[23:16]) + (line2[31:24] * weights[31:24]);
   end
 
   assign uo_out = outputState[7:0];
